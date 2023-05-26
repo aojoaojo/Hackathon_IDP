@@ -12,6 +12,7 @@ from flask import Flask, render_template, request
 
 
 import pandas as pd
+
 '''
 from analise import get_data
 from analise2 import get_data2
