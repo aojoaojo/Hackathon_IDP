@@ -8,11 +8,11 @@ Equipe: João Vitor Brandão, Rafael Nogueira, Lucas Rocha, João Victor Távora
 '''
 
 import flask
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request
 
 
 import pandas as pd
-from flask import Flask, render_template, request
+'''
 from analise import get_data
 from analise2 import get_data2
 from analise3 import get_data3
@@ -31,6 +31,8 @@ netflix_data.head()
 
 cientist_data=pd.read_csv("static/archive/ds_salaries.csv")
 cientist_data.head()
+'''
+
 
 app = Flask(__name__)
 
