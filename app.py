@@ -10,6 +10,7 @@ Equipe: João Vitor Brandão, Rafael Nogueira, Lucas Rocha, João Victor Távora
 import flask
 from flask import Flask, render_template, request
 
+import requests
 
 import pandas as pd
 
@@ -40,7 +41,14 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     name = request.args.get("name")
-    return render_template('index.html',name=name)
+    url = 'https://hackarestaurante-os-conquistadores-da-disrupcao.azurewebsites.net'
+    caminho = '/api/cliente/categorias'
+
+    r = requests.get(url+caminho)
+    resposta = r.json()
+    if request.method == 'POST':
+        return render_template('index.html',name=name,resposta=resposta,categoria_post=request.form['categoria'])
+    return render_template('index.html',name=name,resposta=resposta)
 
 @app.route("/sobre")
 def sobre():
