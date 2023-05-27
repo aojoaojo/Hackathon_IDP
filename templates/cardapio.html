@@ -1,9 +1,9 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <h1> Cardápio </h1>
+    <h1>Cardápio</h1>
 
     <section class="grid1">
-        <p> Selecione a categoria </p>
+        <p>Selecione a categoria</p>
         <form action="/cardapio" method="POST">
             <select name="categoria">
                 {% for categoria in resposta %}
@@ -20,10 +20,12 @@
             {% for produto in categoria['produtos'] %}
                 <div class="grid3-item">
                     <h3>{{ produto['nome'] }}</h3>
-                    <a href="/carrinho/add/{{ produto['id'] }}">
-                        <img src="{{ produto['fotoUrl'] }}" alt="{{ produto }}">
-                    </a>
-                    <p>{{ produto['preco'] }}</p>
+                    <img src="{{ produto['fotoUrl'] }}" alt="{{ produto }}">
+                    <p style="color: black;">{{ produto['preco'] }}</p>
+                    <form action="/carrinho/add" method="POST">
+                        <input type="hidden" name="produto_id" value="{{ produto['id'] }}">
+                        <input type="submit" value="Adicionar ao Carrinho">
+                    </form>
                 </div>
             {% endfor %}
         </div>

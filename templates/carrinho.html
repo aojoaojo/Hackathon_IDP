@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    <h1> Carrinho </h1>
+    <h1>Carrinho</h1>
     
     <div id="carrinho-itens">
-        {% for produto in carrinho %}
-            <div class="carrinho-item">
-                <img src="{{ produto['fotoUrl'] }}" alt="{{ produto['descricao'] }}">
-                <h3>{{ produto['descricao'] }}</h3>
+        {% for item in produtos_api %}
+            <div class="carrinho-item"
+                <h3>{{ item }}</h3>
+                <!-- <img src="{{ produtos_api[item]['imagem'] }}" alt="{{ produtos_api[item]['nome'] }}"> -->
             </div>
         {% endfor %}
     </div>
