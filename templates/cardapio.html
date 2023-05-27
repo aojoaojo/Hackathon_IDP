@@ -28,5 +28,18 @@
             {% endfor %}
         </div>
     {% endfor %}
-
+    <body>
+        <form action="/" method="get">
+            <select name="dropdown" multiple>
+                <option value="Sucos">Option 1</option>
+                <option value="Tapioca Doce">Option 2</option>
+                <option value="Cuscuz">Option 3</option>
+                <option value="Crepe Salgado">Option 3</option>
+                <option value="Crepe Doce">Option 3</option>
+                <option value="Omelete">Option 3</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+    
 {% endblock %}

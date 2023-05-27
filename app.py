@@ -82,6 +82,10 @@ def adicionar_carrinho(produto_id):
 
     return redirect('/carrinho')
 
+def dropdown_categories():
+    selected_options = request.args.getlist('dropdown')
+    # Process the selected options here
+    return render_template('cardapio.html')
 
 
 
