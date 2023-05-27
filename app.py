@@ -38,23 +38,24 @@ def cardapio():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        name = request.args.get("name")
-        url = 'https://hackarestaurante-os-conquistadores-da-disrupcao.azurewebsites.net'
-        caminho = '/api/cliente/usuarios'
-        r = requests.get(url+caminho)
-        resposta = r.json()
-        
         name = request.form['username']
         passw = request.form['password']
+        
+        url = 'https://hackarestaurante-os-conquistadores-da-disrupcao.azurewebsites.net'
+        caminho = '/api/cliente/usuarios'
+        r = requests.get(url + caminho)
+        resposta = r.json()
+        
         try:
-            data = '1'
-            if data is not None:
+            # Verifica se o usuário e a senha estão presentes na resposta da API
+            if any(u['name'] == name and u['password'] == passw for u in resposta):
                 session['logged_in'] = True
                 return redirect('index_inicial.html')
             else:
-                return 'Erro login - usuário não encontrado'
+                return 'Erro no login - usuário não encontrado'
         except:
-            return "Erro Login"
+            return 'Erro no login - falha na autenticação'
+    
     elif request.method == 'GET':
         return render_template('login.html')
 
@@ -82,9 +83,33 @@ def adicionar_carrinho(produto_id):
 
     return redirect('/carrinho')
 
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+        senha = request.form['senha']
+        
+        url = 'https://hackarestaurante-os-conquistadores-da-disrupcao.azurewebsites.net'
+        caminho = '/api/cliente/usuarios'
+        payload = {
+            'nome': nome,
+            'email': email,
+            'senha': senha
+        }
+        response = requests.post(url + caminho, json=payload)
+        
+        if response.status_code == 201:
+            return 'Cadastro realizado com sucesso!'
+        else:
+            return 'Erro no cadastro - falha na API'
+    
+    elif request.method == 'GET':
+        return render_template('cadastro.html')
 
 
 
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+
+if __name__ == '__main__':
+    app.run()

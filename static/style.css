@@ -161,6 +161,25 @@ img {
   display: block;
 }
 
+.Log{
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 10px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.sub{
+  
+}
+.Log2{
+  padding: 7px;
+  margin: 0 auto;
+  margin-top: 7px;
+}
+
 @media (max-width: 600px) {
   .grid1 {
     grid-template-columns: repeat(2, 1fr);
