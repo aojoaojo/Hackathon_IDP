@@ -1,18 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <h1>Cardápio</h1>
 
-    <!-- <section class="grid1">
-        <p>Selecione a categoria</p>
-        <form action="/cardapio" method="POST">
-            <select name="categoria">
-                {% for categoria in resposta %}
-                    <option value="{{ categoria['id'] }}">{{ categoria['nome'] }}</option>
-                {% endfor %}
-            </select>
-            <input type="submit" value="Registrar">
-        </form>
-    </section> -->
+    <h1>Cardápio</h1>
 
     {% for categoria in resposta %}
         <h2>{{ categoria['nome'] }}</h2>

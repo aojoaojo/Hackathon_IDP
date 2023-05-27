@@ -118,6 +118,9 @@ img {
 .Adicionar_carrinho {
   display: flex;
   align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin-left: 119px;
   margin-top: 0px;
   margin-bottom: 30px;
   color: black;
@@ -337,3 +340,35 @@ img {
   grid-row: 2;
   align-self: end;
 }
+
+.flash-messages {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.flash-message {
+  animation: fadeOut 2s ease-in-out forwards;
+  font-size: 50px; /* Adjust the font size as needed */
+  color: black; /* Set the text color to black */
+  background-color: red; /* Set the background color to red */
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+
+
+

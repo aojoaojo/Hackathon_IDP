@@ -8,7 +8,9 @@ Equipe: João Vitor Brandão, Rafael Nogueira, Lucas Rocha, João Victor Távora
 '''
 
 import flask
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, flash
+from flask_bootstrap import Bootstrap
+import time
 
 import requests
 
@@ -16,6 +18,7 @@ import pandas as pd
 
 
 app = Flask(__name__)
+app.secret_key = 'Tavora'
 
    
 @app.route("/")
@@ -78,28 +81,26 @@ def cardapio():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        name = request.form['username']
-        passw = request.form['password']
+        print('HHH', request.form)
+        email = request.form['email']  # Acessa o email a partir do corpo da requisição em formato JSON
         
         url = 'https://hackarestaurante-os-conquistadores-da-disrupcao.azurewebsites.net'
         caminho = '/api/cliente/usuarios'
-        r = requests.get(url + caminho)
-        resposta = r.json()
+        r = requests.get(url + caminho, json={'email': email})
         
-        try:
-            # Verifica se o usuário e a senha estão presentes na resposta da API
-            if any(u['name'] == name and u['password'] == passw for u in resposta):
-                session['logged_in'] = True
-                return redirect('index_inicial.html')
-            else:
-                return 'Erro no login - usuário não encontrado'
-        except:
-            return 'Erro no login - falha na autenticação'
+        if r.status_code == 200:
+            flash('Login realizado com sucesso!', 'success')
+            time.sleep(1)
+            return redirect('/cardapio')
+        else:
+            flash('Erro no Login', 'error')
+            time.sleep(1)
+            return redirect('/login')
     
     elif request.method == 'GET':
         return render_template('login.html')
 
-@app.route("/carrinho")
+
 @app.route("/carrinho")
 def carrinho():
     name = request.args.get("name")
@@ -163,28 +164,30 @@ def cadastro():
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
-        senha = request.form['senha']
+        celular = request.form['celular']
+        cpf = request.form['cpf']
         
         url = 'https://hackarestaurante-os-conquistadores-da-disrupcao.azurewebsites.net'
         caminho = '/api/cliente/usuarios'
         payload = {
             'nome': nome,
             'email': email,
-            'senha': senha
+            'celular': celular,
+            "cpf": cpf
         }
         response = requests.post(url + caminho, json=payload)
         
-        if response.status_code == 201:
-            return 'Cadastro realizado com sucesso!'
+        if response.status_code == 200:
+            flash('Cadastro realizado com sucesso!', 'success')
+            time.sleep(1)
+            return redirect('/cardapio')
         else:
-            return 'Erro no cadastro - falha na API'
+            flash('Erro no cadastro', 'error')
+            time.sleep(1)
+            return redirect('/cadastro')
     
     elif request.method == 'GET':
         return render_template('cadastro.html')
-
-
-
-
 
 if __name__ == '__main__':
     app.run(debug = True)

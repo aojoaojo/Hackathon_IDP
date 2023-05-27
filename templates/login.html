@@ -14,15 +14,29 @@
 <div class="container">
     <h1>Login</h1>
     <form action="/login" method="POST">
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" name="username" required>
 
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required>
+      <label for="email">Email:</label>
 
-        <input type="submit" value="Entrar">
+      <input type="text" id="email" name="email" placeholder="Digite seu email" required>
+
+      <input type="submit" value="Entrar">
+  
     </form>
 
     <p>Ainda não tem uma conta? <a href="/cadastro" style="color: black;"><strong>Cadastrar</strong></a></p>
 </div>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="alert alert-danger flash-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+{% endwith %}
+
 {% endblock content %}
