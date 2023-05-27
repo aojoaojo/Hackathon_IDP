@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h1> Carrinho </h1>
+    
+    <div id="carrinho-itens">
+        {% for produto in carrinho %}
+            <div class="carrinho-item">
+                <img src="{{ produto['fotoUrl'] }}" alt="{{ produto['descricao'] }}">
+                <h3>{{ produto['descricao'] }}</h3>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

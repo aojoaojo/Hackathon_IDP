@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="static/style.css" />
-    <title>Restaurante</title>
-  </head>
-  <body>
+{% extends "layout.html" %}
 
-    <header class="header">
-      <a href="/">Página Inicial</a>
-      <nav>
-        <ul class="menu">
-          <li><a href="/login">Login</a></li>
-          <li><a href="/cardapio">cardapio</a></li>
-        </ul>
-      </nav>
-    </header>
+{% block content %}
+<title>Tela Inicial</title>
+    <style>
+        body {
+        background-image: url("static/images/fundo.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        }
 
-    <h1> Olá, {{ name }} !! </h1>
-
-  </body>
-</html>
+    </style>
+    <div class="overlay"></div>
+{% endblock content %}

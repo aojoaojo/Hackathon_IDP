@@ -14,30 +14,10 @@ import requests
 
 import pandas as pd
 
-'''
-from analise import get_data
-from analise2 import get_data2
-from analise3 import get_data3
-
-data = get_data()
-print(data)
-
-data2=get_data2
-print(data2)
-
-data3=get_data3
-print(data3)
-
-netflix_data=pd.read_csv("static/archive/netflix_titles.csv")
-netflix_data.head()
-
-cientist_data=pd.read_csv("static/archive/ds_salaries.csv")
-cientist_data.head()
-'''
-
 
 app = Flask(__name__)
 
+   
 @app.route("/")
 def index():
     return render_template('index_inicial.html')
@@ -57,27 +37,53 @@ def cardapio():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    name = request.args.get("name")
-    url = 'https://hackarestaurante-os-conquistadores-da-disrupcao.azurewebsites.net'
-    caminho = '/api/cliente/usuarios'
-    r = requests.get(url+caminho)
-    resposta = r.json()
-    
-    name = request.form['username']
-    passw = request.form['password']
-    try:
-        data = User.query.filter_by(username=name, password=passw).first()
-        if data is not None:
-            session['logged_in'] = True
-            return redirect(url_for('index'))
-        else:
-            return 'Erro login - usuário não encontrado'
-    except:
-        return "Erro Login"
+    if request.method == 'POST':
+        name = request.args.get("name")
+        url = 'https://hackarestaurante-os-conquistadores-da-disrupcao.azurewebsites.net'
+        caminho = '/api/cliente/usuarios'
+        r = requests.get(url+caminho)
+        resposta = r.json()
+        
+        name = request.form['username']
+        passw = request.form['password']
+        try:
+            data = '1'
+            if data is not None:
+                session['logged_in'] = True
+                return redirect('index_inicial.html')
+            else:
+                return 'Erro login - usuário não encontrado'
+        except:
+            return "Erro Login"
+    elif request.method == 'GET':
+        return render_template('login.html')
 
-@app.route("/gosto")
-def gosto():
-    return render_template('gosto.html',data=data,cientist_data=cientist_data,netflix_data=netflix_data)
+@app.route("/carrinho")
+def carrinho():
+    return render_template('carrinho.html')
+
+# Antes das rotas, declare uma lista vazia para o carrinho
+carrinho = []
+
+@app.route('/carrinho/add/<int:produto_id>', methods=['GET'])
+def adicionar_carrinho(produto_id):
+    # Lógica para adicionar o produto ao carrinho
+    # Você precisa armazenar as informações do produto no carrinho, como foto e descrição
+    # ...
+
+    # Exemplo de armazenamento das informações do produto em um dicionário
+    produto = {
+        'id': produto_id,
+        'fotoUrl': 'caminho/para/foto.jpg',
+        'descricao': 'Descrição do produto'
+    }
+
+    carrinho.append(produto)  # Adiciona o produto à lista do carrinho
+
+    return redirect('/carrinho')
+
+
+
 
 
 if __name__ == "__main__":

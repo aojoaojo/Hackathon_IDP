@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 
-{% block conteudo %}
-{% if session['logged_in'] %}
-<p>You're logged in already!</p>
-{% else %}
+{% block content %}
+
     <h1> Login </h1>
     <section class="grid3">
         <p> Faça login aqui.
@@ -15,5 +13,4 @@
 
     </section>
 
-{% endif %}
-{% endblock conteudo %}
+{% endblock content %}
