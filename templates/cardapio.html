@@ -1,6 +1,5 @@
 {% extends 'layout.html' %}
 {%block content %}
-        <h1> Olá, {{ name }} !! </h1>
         <h1> Cardápio </h1>
 
         <section class="grid1">
@@ -17,18 +16,18 @@
         </section>
 
         {% for categoria in resposta %}
-                <h2> {{ categoria['nome'] }} </h2>
+                <h1> {{ categoria['nome'] }} </h1>
                 <div class="grid3">
                 {% for produto in categoria['produtos'] %}
                         <div class="grid3-item">
                         <h3> {{ produto['nome'] }} </h3>
+                        <img src="{{ produto['fotoUrl'] }}" alt="{{produto}}">
                         <p> {{ produto['descricao'] }} </p>
                         <p> {{ produto['preco'] }} </p>
-                {% if categoria['nome'] == 'Cuscuz'%}
-                        <img src="{{ produto['fotoUrl'] }}" alt="Cuscuz">
-                {% endif %}
+                
                         </div>
                 {% endfor %}
                 </div class="grid3">
         {% endfor %}
+        
 {% endblock %}
