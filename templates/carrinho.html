@@ -3,12 +3,12 @@
 {% block content %}
 
     <h1>Carrinho</h1>
-    
-    <div id="carrinho-itens">
-        {% for item in produtos_api %}
-            <div class="carrinho-item"
-                <h3>{{ item }}</h3>
-                <!-- <img src="{{ produtos_api[item]['imagem'] }}" alt="{{ produtos_api[item]['nome'] }}"> -->
+
+    <div id="carrinho-itens" class = "grid3">
+        {% for produto_id, produto_info in produtos_api.items() %}
+            <div class="carrinho-item">
+                <h3>{{ produto_info['nome'] }}</h3>
+                <img src="{{ produto_info['imagem'] }}" alt="{{ produto_info['nome'] }}">
             </div>
         {% endfor %}
     </div>

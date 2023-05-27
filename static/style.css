@@ -62,25 +62,46 @@ a {
 h1 {
   text-align: center;
   margin-top: 25px;
+  margin-bottom: 20px;
   color: black;
 }
 
 h2 {
-  padding-top: 20px;
   text-align: center;
-  margin-top: 0;
-  color: white;
+  margin-top: 35px;
+  color: black;
 }
 h3 {
   text-align: center;
-  margin-top: 25px;
+  margin-top: 5px;
+  margin-bottom: 0px;
   color: black;
 }
+
+h4 {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: black;
+} 
 
 img {
   max-width: 100%;
   display: block;
   background: #1d1e20;
+}
+
+.preco {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.nome_produto {
+  text-align: center;
+  margin-top: 0px;
+  color: black;
 }
 
 .img1 {
@@ -94,6 +115,13 @@ img {
         
 }
 
+.Adicionar_carrinho {
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  color: black;
+}
 .container {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
@@ -194,9 +222,6 @@ img {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.sub{
-  
-}
 .Log2{
   padding: 7px;
   margin: 0 auto;

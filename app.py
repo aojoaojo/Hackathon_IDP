@@ -112,19 +112,17 @@ def carrinho():
     produtos_api = {}
 
     for item_do_carrinho in carrinho_produtos:
-        print(item_do_carrinho)
-        for i, categoria in enumerate(resposta_api):
+        for categoria in resposta_api:
             produtos_da_categoria = categoria['produtos']
             for produto in produtos_da_categoria:
                 if produto['id'] == int(item_do_carrinho):
-                    print(produto)
                     produtos_api[produto['id']] = {
-                    'nome': produto['nome'],
-                    'imagem': produto['fotoUrl']
-                }
-    print(list(produtos_api.values()))
+                        'nome': produto['nome'],
+                        'imagem': produto['fotoUrl']
+                    }
 
     return render_template('carrinho.html', produtos_api=produtos_api)
+
 
     
     # # Itera sobre as categorias da resposta da API
