@@ -99,7 +99,7 @@ def login():
     elif request.method == 'GET':
         return render_template('login.html')
 
-@app.route("/carrinho")
+
 @app.route("/carrinho")
 def carrinho():
     name = request.args.get("name")
@@ -158,6 +158,27 @@ carrinho = []
 
 #     return redirect('/carrinho')
 
+def obter_preco_do_produto(produto_id):
+    # Lógica para obter o preço do produto com base no ID
+    # Substitua pela sua lógica de obtenção do preço do produto a partir da API, banco de dados ou outra fonte de dados
+
+    # Exemplo: supondo que você tenha uma lista de produtos com os preços já conhecidos
+    produtos = [
+        {'id': 1, 'nome': 'Produto 1', 'preco': 10.99},
+        {'id': 2, 'nome': 'Produto 2', 'preco': 19.99},
+        {'id': 3, 'nome': 'Produto 3', 'preco': 5.99},
+        # ...
+    ]
+
+    # Localiza o produto com base no ID e retorna o preço correspondente
+    for produto in carrinho:
+        if produto['id'] == produto_id:
+            return produto['preco']
+
+    # Retorna 0 caso o produto não seja encontrado (ou qualquer outra lógica adequada)
+    return 0
+
+
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
@@ -182,8 +203,36 @@ def cadastro():
     elif request.method == 'GET':
         return render_template('cadastro.html')
 
+def calcular_total_carrinho():
+    total = 0
 
+    # Itera sobre os produtos no carrinho
+    for item_do_carrinho in carrinho_produtos:
+        # Lógica para obter o preço do produto com base no ID
+        # Substitua pela sua lógica para obter o preço do produto a partir da API ou outra fonte de dados
+        preco = obter_preco_do_produto(item_do_carrinho)
 
+        # Adiciona o preço do produto ao total
+        total += preco
+
+    return total
+
+@app.route('/finalizar-compra')
+def finalizar_compra():
+    # Lógica para obter o valor total do carrinho
+    total_carrinho = calcular_total_carrinho()  # Substitua pela sua lógica de cálculo do valor total
+
+    # Chamada à API para obter as formas de pagamento
+    url = 'https://hackarestaurante-os-conquistadores-da-disrupcao.azurewebsites.net'
+    caminho = '/api/formas-pagamento'
+    response = requests.get(url + caminho)
+    
+    if response.status_code == 200:
+        formas_pagamento = response.json()
+    else:
+        formas_pagamento = []
+
+    return render_template('finalizar_compra.html', total_carrinho=total_carrinho, formas_pagamento=formas_pagamento)
 
 
 if __name__ == '__main__':

@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formas de Pagamento</title>
-</head>
-<body>
-  <h1>Formas de Pagamento</h1>
+{% extends "layout.html" %}
 
-  <ul>
-    {% for forma_pagamento in formas_pagamento %}
-      <li>{{ forma_pagamento }}</li>
-    {% endfor %}
-  </ul>
-</body>
-</html>
+{% block content %}
+
+<h1>Finalizar Compra</h1>
+
+<h2>Total do Carrinho: R$ {{ total_carrinho }}</h2>
+
+<h2>Formas de Pagamento Disponíveis:</h2>
+<ul>
+  {% for forma_pagamento in formas_pagamento %}
+    <li>{{ forma_pagamento.descricao }}</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
